@@ -44,7 +44,7 @@ daemons:
 	                         withdraw_coin
 
 dependencies:
-	$(COMPOSE) up -d vault db phpmyadmin redis rabbitmq smtp_relay slanger coinhub
+	$(COMPOSE) up -d vault db phpmyadmin redis rabbitmq smtp_relay ranger coinhub
 	$(COMPOSE) run --rm vault secrets enable totp || true
 
 prepare: dependencies daemons cryptonodes

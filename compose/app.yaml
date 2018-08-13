@@ -11,7 +11,7 @@ services:
       - rabbitmq
       - smtp_relay
       - barong
-      - slanger
+      - ranger
       - geth
       - coinhub
     env_file:
