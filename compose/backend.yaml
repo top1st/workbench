@@ -2,7 +2,7 @@ version: '3.6'
 
 services:
   smtp_relay:
-    image: kaigara/postfix:latest
+    image: kaigara/postfix
     volumes:
       - ../config/smtp-relay.yaml:/etc/kaigara/metadata/relay.yml
 
