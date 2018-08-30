@@ -4,18 +4,22 @@ COMPOSE = docker-compose
 
 default: run
 
-build:
+pull:
+	$(COMPOSE) pull vault      \
+	                db         \
+	                phpmyadmin \
+	                redis      \
+	                rabbitmq   \
+	                smtp_relay \
+	                ranger     \
+	                coinhub    \
+	                geth
+
+
+build: pull
 	$(COMPOSE) build peatio     \
 	                 barong     \
 	                 trading_ui \
-	                 vault      \
-	                 db         \
-	                 phpmyadmin \
-	                 redis      \
-	                 rabbitmq   \
-	                 smtp_relay \
-	                 ranger     \
-	                 coinhub    \
 	                 integration
 
 geth:
