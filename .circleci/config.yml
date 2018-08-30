@@ -44,6 +44,6 @@ jobs:
       - run:
           name: Run integration tests
           command: |
-            cd test/integration && yarn && yarn --record --group $CIRCLE_JOB \
+            cd test/integration && yarn && yarn cypress run --record --group $CIRCLE_JOB \
             --ci-build-id $CIRCLE_BUILD_NUM \
             --key $CYPRESS_RECORD_KEY
