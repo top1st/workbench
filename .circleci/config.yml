@@ -40,6 +40,7 @@ jobs:
           environment:
             MOCHA_FILE: /results/test-results.xml
           command: |
+            mkdir ./results && \
             docker-compose run -e MOCHA_FILE -v $(pwd)/results:/results integration yarn test \
               --record \
               --group $CIRCLE_JOB \
