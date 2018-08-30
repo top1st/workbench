@@ -2,6 +2,7 @@
 #
 # Check https://circleci.com/docs/2.0/language-ruby/ for more details
 #
+
 version: 2
 jobs:
   build:
@@ -26,6 +27,9 @@ jobs:
           name: Download apps
           command: "make update"
       - run:
+          name: Pull dependencies docker images
+          command: "docker-compose pull"
+      - run:
           name: Build docker images
           command: "make build"
       - run:
@@ -33,4 +37,12 @@ jobs:
           command: "make start"
       - run:
           name: Run integration tests
-          command: "make test"
+          environment:
+            MOCHA_FILE: /results/test-results.xml
+          command: |
+            docker-compose run -e MOCHA_FILE -v $(pwd)/results:/results integration yarn test \
+              --record \
+              --group $CIRCLE_JOB \
+              --ci-build-id $CIRCLE_BUILD_NUM \
+              --key $CYPRESS_RECORD_KEY
+
