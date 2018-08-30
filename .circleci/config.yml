@@ -26,24 +26,18 @@ jobs:
       - run:
           name: Download apps
           command: "make update"
-      - run:
-          name: Pull dependencies docker images
-          command: "docker-compose pull"
-      - run:
-          name: Build docker images
-          command: "make build"
-      - run:
-          name: Run workbench
-          command: "make start"
+      # - run:
+      #     name: Pull dependencies docker images
+      #     command: "docker-compose pull"
+      # - run:
+      #     name: Build docker images
+      #     command: "make build"
+      # - run:
+      #     name: Run workbench
+      #     command: "make start"
       - run:
           name: Run integration tests
-          environment:
-            MOCHA_FILE: /results/test-results.xml
           command: |
-            mkdir ./results && \
-            docker-compose run -e MOCHA_FILE -v $(pwd)/results:/results integration yarn test \
-              --record \
-              --group $CIRCLE_JOB \
-              --ci-build-id $CIRCLE_BUILD_NUM \
-              --key $CYPRESS_RECORD_KEY
-
+            cd test/integration && yarn && yarn --record --group $CIRCLE_JOB \
+            --ci-build-id $CIRCLE_BUILD_NUM \
+            --key $CYPRESS_RECORD_KEY
